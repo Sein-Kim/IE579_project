@@ -35,7 +35,6 @@ class AgentRL_attention(nn.Module):
         return self.critic(x)
 
     def get_action_and_value(self, x, action=None):
-        print(x.shape)
         logits = self.actor(x)
         if torch.isnan(logits).sum().item() > 0:
             print('he')
@@ -64,12 +63,14 @@ class multi_head(nn.Module):
         features_attn = F.softmax(torch.cat(features_attn), dim=-1).unsqueeze(1)
         features = torch.cat(features)
         features = (features * features)
-
+        features = features.reshape(-1,64)
         return features, features_attn
     
     def forward(self,x):
-        x1,x2,x3,x4 = x[:16], x[16:32], x[32:48], x[48:]
+        x1,x2,x3,x4 = x[:,:16], x[:,16:32], x[:,32:48], x[:,48:]
         
         results = self.attn_summary([x1,x2,x3,x4])
         
         return results
+        
+    
