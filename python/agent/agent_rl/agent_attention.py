@@ -27,6 +27,10 @@ class AgentRL_attention(nn.Module):
             nn.Tanh(),
             multi_head(),
             nn.Tanh(),
+            multi_head(),
+            nn.Tanh(),
+            layer_init(nn.Linear(64,64)),
+            nn.Tanh(),
             layer_init(nn.Linear(64,dim_action),std=0.01),
         )
         
@@ -48,17 +52,17 @@ class AgentRL_attention(nn.Module):
 class multi_head(nn.Module):
     def __init__(self):
         super(multi_head, self).__init__()
-        self.A = nn.ModuleList([nn.Linear(16, 1) for _ in range(4)])
+        self.A = nn.ModuleList([nn.Linear(32, 1) for _ in range(4)])
         self.weight_init()
 
     def weight_init(self):
-        for i in range(4):
+        for i in range(2):
             nn.init.xavier_normal_(self.A[i].weight)
             self.A[i].bias.data.fill_(0.0)
     
     def attn_summary(self, features):
         features_attn = []
-        for i in range(4):
+        for i in range(2):
             features_attn.append((self.A[i](features[i].squeeze())))
         features_attn = F.softmax(torch.cat(features_attn), dim=-1).unsqueeze(1)
         features = torch.cat(features)
@@ -67,10 +71,13 @@ class multi_head(nn.Module):
         return features, features_attn
     
     def forward(self,x):
-        x1,x2,x3,x4 = x[:,:16], x[:,16:32], x[:,32:48], x[:,48:]
-        
-        results, _ = self.attn_summary([x1,x2,x3,x4])
-        
+        # x1,x2,x3,x4 = x[:,:16], x[:,16:32], x[:,32:48], x[:,48:]
+
+        x1,x2 = x[:,:32], x[:,32:]
+
+        # results, _ = self.attn_summary([x1,x2,x3,x4])
+        results, _ = self.attn_summary([x1,x2])
+
         return results
         
     
