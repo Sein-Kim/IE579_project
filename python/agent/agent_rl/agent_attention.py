@@ -35,6 +35,7 @@ class AgentRL_attention(nn.Module):
         return self.critic(x)
 
     def get_action_and_value(self, x, action=None):
+        print(x.shape)
         logits = self.actor(x)
         if torch.isnan(logits).sum().item() > 0:
             print('he')
