@@ -61,13 +61,14 @@ class multi_head(nn.Module):
             self.A[i].bias.data.fill_(0.0)
     
     def attn_summary(self, features):
+        k = features[0].shape[0]
         features_attn = []
         for i in range(2):
             features_attn.append((self.A[i](features[i].squeeze())))
         features_attn = F.softmax(torch.cat(features_attn), dim=-1).unsqueeze(1)
         features = torch.cat(features)
         features = (features * features)
-        features = features.reshape(-1,64)
+        features = torch.cat((features[:k],features[k:]),axis=1)
         return features, features_attn
     
     def forward(self,x):
