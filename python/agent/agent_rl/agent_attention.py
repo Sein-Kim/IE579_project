@@ -69,7 +69,7 @@ class multi_head(nn.Module):
     def forward(self,x):
         x1,x2,x3,x4 = x[:,:16], x[:,16:32], x[:,32:48], x[:,48:]
         
-        results = self.attn_summary([x1,x2,x3,x4])
+        results, _ = self.attn_summary([x1,x2,x3,x4])
         
         return results
         
