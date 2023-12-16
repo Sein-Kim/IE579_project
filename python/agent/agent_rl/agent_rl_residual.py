@@ -67,6 +67,7 @@ class Residual(nn.Module):
         
         x1 = self.mlp3(features)
         x1 = self.act(x1)
+        
         x1 = self.mlp4(features)
         x1 = self.act(x1)
         
