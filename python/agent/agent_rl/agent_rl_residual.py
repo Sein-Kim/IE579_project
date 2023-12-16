@@ -53,26 +53,15 @@ class Residual(nn.Module):
     def __init__(self):
         super(Residual,self).__init__()
         self.mlp1 = nn.Linear(64,64)
-        self.mlp2 = nn.Linear(64,32)
-        self.mlp3 = nn.Linear(32,16)
-        self.mlp4 = nn.Linear(16,32)
-        self.mlp5 = nn.Linear(32,64)
+        self.mlp2 = nn.Linear(64,64)
+
         self.act = nn.Tanh()
     def forward(self, features):
+        
         x1 = self.mlp1(features)
         x1 = self.act(x1)
-        
         x1 = self.mlp2(x1)
         x1 = self.act(x1)
-        
-        x1 = self.mlp3(x1)
-        x1 = self.act(x1)
-        
-        x1 = self.mlp4(x1)
-        x1 = self.act(x1)
-        
-        x1 = self.mlp5(x1)
         x1 = x1 + features
-        
         x1 = self.act(x1)
         return x1
