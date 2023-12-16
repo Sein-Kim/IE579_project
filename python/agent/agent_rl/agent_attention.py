@@ -52,7 +52,7 @@ class AgentRL_attention(nn.Module):
 class multi_head(nn.Module):
     def __init__(self):
         super(multi_head, self).__init__()
-        self.A = nn.ModuleList([nn.Linear(32, 1) for _ in range(4)])
+        self.A = nn.ModuleList([nn.Linear(32, 1) for _ in range(2)])
         self.weight_init()
 
     def weight_init(self):
