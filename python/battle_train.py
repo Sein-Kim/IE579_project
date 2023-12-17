@@ -228,5 +228,7 @@ if __name__ == "__main__":
             if args.target_kl is not None:
                 if approx_kl > args.target_kl:
                     break
-
+    
+    torch.save(agent1.state_dict(), './agent_rl.pt')
+    
     env.close()
