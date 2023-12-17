@@ -24,6 +24,8 @@ class AgentRL(nn.Module):
         self.actor = nn.Sequential(
             layer_init(nn.Linear(dim_obs, 64)),
             nn.Tanh(),
+            Residual(),
+            Residual(),
             layer_init(nn.Linear(64, 64)),
             nn.Tanh(),
             layer_init(nn.Linear(64, dim_action), std=0.01),
@@ -42,4 +44,20 @@ class AgentRL(nn.Module):
         return action, probs.log_prob(action), probs.entropy(), self.critic(x)
 
 
+class Residual(nn.Module):
+    def __init__(self):
+        super(Residual,self).__init__()
+        self.mlp1 = layer_init(nn.Linear(64,64))
+        self.mlp2 = layer_init(nn.Linear(64,64))
 
+        self.act = nn.Tanh()
+    def forward(self, features):
+        
+        x1 = self.mlp1(features)
+        x1 = self.act(x1)
+        x1 = self.mlp2(x1)
+        x1 = self.act(x1)
+        x1 = x1 + features
+        x1 = self.act(x1)
+        return x1
+ 

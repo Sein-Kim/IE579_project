@@ -10,13 +10,11 @@ from battle_env import MAgentBattle
 from agent.agent_rl.agent_rl import AgentRL
 from agent.agent_rule.agent_random import AgentRandom
 
-from agent.agent_rl.agent_attention import AgentRL_attention
 
-from agent.agent_rl.agent_rl_residual import AgentRL_residual
 def parse_args():
     # fmt: off
     parser = argparse.ArgumentParser()
-    parser.add_argument("--learning-rate", type=float, default=2.5e-4,
+    parser.add_argument("--learning-rate", type=float, default=0.001,
                         help="the learning rate of the optimizer")
     parser.add_argument("--seed", type=int, default=1,
                         help="seed of the experiment")
@@ -66,9 +64,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     env = MAgentBattle(visualize=False, eval_mode=False, obs_flat=True)
-    # agent1 = AgentRL(dim_obs=env.dim_obs, dim_action=env.dim_action)
-    # agent1 = AgentRL_attention(dim_obs=env.dim_obs, dim_action=env.dim_action)
-    agent1 = AgentRL_residual(dim_obs=env.dim_obs, dim_action=env.dim_action)
+    agent1 = AgentRL(dim_obs=env.dim_obs, dim_action=env.dim_action)
     agent2 = AgentRandom(num_agent=env.num_agent, dim_obs=env.dim_obs, dim_action=env.dim_action)
 
     num_rl_win = 0
