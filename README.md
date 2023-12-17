@@ -1,7 +1,9 @@
 ## Proposed methods
 
 We modify the agent_rl.py in python/agent/agent_rl folder.
+
 (We does not modify any code from instruction code of lecture except agent_rl.py)
+
 Therefore, just replacing the agent_rl.py code, in your environment, you can conduct our proposed model.
 
 ## Train models
