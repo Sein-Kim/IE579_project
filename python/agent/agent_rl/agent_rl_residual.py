@@ -70,7 +70,8 @@ class Residual(nn.Module):
         self.mlp2 = layer_init(nn.Linear(64,64))
         self.mlp3 = layer_init(nn.Linear(64,64))
         self.mlp4 = layer_init(nn.Linear(64,64))
-
+        self.mlp5 = layer_init(nn.Linear(64,64))
+        self.mlp6 = layer_init(nn.Linear(64,64))
         self.act = nn.Tanh()
     def forward(self, features):
         
@@ -83,6 +84,12 @@ class Residual(nn.Module):
         x1 = self.act(x1)
         x1 = self.mlp4(x1)
         x1 = self.act(x1)
+        
+        x1 = self.mlp5(x1)
+        x1 = self.act(x1)
+        x1 = self.mlp6(x1)
+        x1 = self.act(x1)
+        
         x1 = x1 + features
         x1 = self.act(x1)
         return x1
