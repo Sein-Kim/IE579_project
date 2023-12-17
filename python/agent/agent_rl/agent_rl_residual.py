@@ -26,6 +26,8 @@ class AgentRL_residual(nn.Module):
             nn.Tanh(),
             Residual(),
             Residual(),
+            Residual(),
+            Residual(),
             layer_init(nn.Linear(64, 64)),
             nn.Tanh(),
             layer_init(nn.Linear(64, dim_action), std=0.01),
