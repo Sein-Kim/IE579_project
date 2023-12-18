@@ -31,7 +31,7 @@ if __name__ == "__main__":
         # Team 1 make decisions. (in a decentralized manner)
         a1 = []
         for agent_id, obs in obs1.items():
-            inputs = torch.cat((torch.Tensor(obs[0]).reshape(-1), torch.Tensor(obs[1]).reshape(-1)),axis=0)
+            inputs = torch.cat((torch.Tensor(obs[0]).reshape(-1).unsqueeze(0), torch.Tensor(obs[1]).reshape(-1).unsqueeze(0)),axis=1)
             a1.append(agent1[agent_id].get_action_eval(torch.Tensor(inputs)))
         a1 = np.concatenate(a1)
 
