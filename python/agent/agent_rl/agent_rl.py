@@ -12,7 +12,7 @@ def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
 
 
 class AgentRL(nn.Module):
-    def __init__(self, dim_obs, dim_action):
+    def __init__(self, dim_obs, dim_action, num_agent=1):
         super(AgentRL, self).__init__()
         self.critic = nn.Sequential(
             layer_init(nn.Linear(dim_obs, 64)),
