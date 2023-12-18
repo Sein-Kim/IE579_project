@@ -33,8 +33,7 @@ if __name__ == "__main__":
         for agent_id, obs in obs1.items():
             inputs = torch.cat((torch.Tensor(obs[0]).reshape(-1), torch.Tensor(obs[1]).reshape(-1)),axis=0)
             a1.append(agent1[agent_id].get_action_eval(torch.Tensor(inputs)).item())
-        a1 = np.array(a1)
-        print(a1)
+        a1 = np.array(a1, dtype=np.int32)
         # a1 = np.concatenate(a1)
 
         # Team 2 make decisions. (in a decentralized manner)
@@ -42,7 +41,6 @@ if __name__ == "__main__":
         for agent_id, obs in obs2.items():
             a2.append(agent2[agent_id].get_action_eval(obs))
         a2 = np.concatenate(a2)
-        print(a2)
 
         (obs1, obs2), reward, (done1, done2, done_env), (valid1, valid2) = env.step(a1, a2)
         env_t += 1
