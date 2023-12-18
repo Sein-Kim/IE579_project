@@ -12,7 +12,7 @@ if __name__ == "__main__":
     ########## You have to design 'get_action_eval' for evaluation.
     ########## This script is evaluation for 1 episode.
 
-    env = MAgentBattle(visualize=False, eval_mode=True)
+    env = MAgentBattle(visualize=False, eval_mode=True, obs_flat=True)
 
     agent1 = [AgentRL(num_agent=1, dim_obs=env.dim_obs, dim_action=env.dim_action) for _ in range(env.num_agent)]
     
