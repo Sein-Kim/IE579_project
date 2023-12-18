@@ -44,7 +44,8 @@ if __name__ == "__main__":
 
         (obs1, obs2), reward, (done1, done2, done_env), (valid1, valid2) = env.step(a1, a2)
         env_t += 1
-
+        print(obs1)
+        print(obs2)
     if len(obs1[1]) > len(obs2[1]):
         print('RL Win')
     elif len(obs1[1]) < len(obs2[1]):
