@@ -41,6 +41,7 @@ if __name__ == "__main__":
         for agent_id, obs in obs2.items():
             a2.append(agent2[agent_id].get_action_eval(obs))
         a2 = np.concatenate(a2)
+        print(a2)
 
         (obs1, obs2), reward, (done1, done2, done_env), (valid1, valid2) = env.step(a1, a2)
         env_t += 1
