@@ -42,6 +42,15 @@ class AgentRL(nn.Module):
         if action is None:
             action = probs.sample()
         return action, probs.log_prob(action), probs.entropy(), self.critic(x)
+    
+    def get_action_eval(self,x):
+        logits = self.actor(x)
+        if torch.isnan(logits).sum().item() > 0:
+            print('he')
+        probs = Categorical(logits=logits)
+        action = probs.sample()
+        return action
+        
 
 
 class Residual(nn.Module):
