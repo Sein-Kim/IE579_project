@@ -12,3 +12,10 @@ To train our model, use
 ```
 python python/battle_train.py --learning_rate 0.001
 ```
+
+## Eval models
+To evaluate our model-agent1 againts to Random model-agent2, use
+
+```
+python python/battle_eval.py
+```

@@ -34,7 +34,6 @@ if __name__ == "__main__":
             inputs = torch.cat((torch.Tensor(obs[0]).reshape(-1), torch.Tensor(obs[1]).reshape(-1)),axis=0)
             a1.append(agent1[agent_id].get_action_eval(torch.Tensor(inputs)).item())
         a1 = np.array(a1, dtype=np.int32)
-        # a1 = np.concatenate(a1)
 
         # Team 2 make decisions. (in a decentralized manner)
         a2 = []
