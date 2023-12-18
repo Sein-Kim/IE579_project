@@ -49,4 +49,6 @@ if __name__ == "__main__":
         print('RL Win')
     elif len(obs1[1]) < len(obs2[1]):
         print('Random Win')
+    elif len(obs1[1]) == len(obs2[1]):
+        print('Draw')
     env.close()
